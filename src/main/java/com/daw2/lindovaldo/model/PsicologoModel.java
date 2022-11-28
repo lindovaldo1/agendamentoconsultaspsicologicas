@@ -24,7 +24,7 @@ public class PsicologoModel implements Serializable {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    private Specialty specialty = Specialty.NONE;
+    private SpecialtyModel specialty = SpecialtyModel.NONE;
 
     public Long getCode() {
         return code;
@@ -50,11 +50,11 @@ public class PsicologoModel implements Serializable {
         this.lastName = lastName;
     }
 
-    public Specialty getSpecialty() {
+    public SpecialtyModel getSpecialty() {
         return specialty;
     }
 
-    public void setSpecialty(Specialty specialty) {
+    public void setSpecialty(SpecialtyModel specialty) {
         this.specialty = specialty;
     }
 
