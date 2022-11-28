@@ -1,13 +1,16 @@
 package com.daw2.lindovaldo.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PacienteModel {
+@Entity
+@Table(name = "paciente")
+@DynamicUpdate
+public class PacienteModel implements Serializable {
 
     @Id
     @SequenceGenerator(name = "generator1", sequenceName = "aplication_code_seq", allocationSize = 1)
