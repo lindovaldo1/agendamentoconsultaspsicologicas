@@ -13,7 +13,7 @@ import java.util.Objects;
 public class PsicologoModel implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "generator2", sequenceName = "aplication_code_seq", allocationSize = 1)
+    @SequenceGenerator(name = "generator2", sequenceName = "psicologo_code_seq", allocationSize = 1)
     @GeneratedValue(generator = "generator2", strategy = GenerationType.SEQUENCE)
     private Long code;
 

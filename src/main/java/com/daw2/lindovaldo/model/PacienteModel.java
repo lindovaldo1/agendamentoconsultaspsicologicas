@@ -13,7 +13,7 @@ import java.util.Objects;
 public class PacienteModel implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "generator1", sequenceName = "aplication_code_seq", allocationSize = 1)
+    @SequenceGenerator(name = "generator1", sequenceName = "paciente_code_seq", allocationSize = 1)
     @GeneratedValue(generator = "generator1", strategy = GenerationType.SEQUENCE)
     private Long code;
 
