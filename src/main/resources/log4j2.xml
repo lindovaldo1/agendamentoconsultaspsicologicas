@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<xml status="WARN">
+<Configure status="WARN">
     <properties>
         <property name="nome">agendamentoconsultaspsicologicas</property>
         <property name="padraoConsole">%style{%d{HH:mm:ss.SSS}}{black} [%style{%t}{bright,blue}] %highlight{%-5level} %style{%logger{0}}{bright,yellow}: %msg%n%throwable</property>
@@ -45,4 +45,4 @@
             <AppenderRef ref="Console"/>
         </AsyncLogger> -->
     </Loggers>
-</xml>
+</Configure>
