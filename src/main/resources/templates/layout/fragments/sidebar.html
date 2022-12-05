@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<!-- offcanvas sidebar -->
+	<div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="sidebar" th:fragment="sidebar">
+		<div class="offcanvas-body">
+			<nav class="navbar-dark">
+				<ul class="navbar-nav">
+					<li>
+						<div class="small fw-bold text-uppercase px-3 mt-3">Opções</div>
+					</li>
+					<li class="my-2">
+						<hr class="dropdown-toggle-split" />
+					</li>
+
+					<!-- 1o elemento -->
+					<li>
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#aplicacoes">
+							<span class="me-2">
+								<i class="bi bi-clock-fill"></i>
+							</span>
+							<span>Agendamentos</span>
+							<span class="ms-auto">
+								<span class="right-icon">
+									<i class="bi bi-chevron-down"></i>
+								</span>
+							</span>
+						</a>   
+						
+						<div class="collapse" id="aplicacoes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/aplicacoes')} ? show">
+							<ul class="navbar-nav ps-3">								
+								<li>
+									<a th:href="@{/aplicacoes/abrirpesquisar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-search text-white"></i>
+										</span>
+										<span class="text-white">Pesquisar</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+					<!-- 2o elemento -->
+					<li>
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#pessoas">
+							<span class="me-2">
+								<i class="bi bi-person-fill"></i>
+							</span>
+							<span>Pacientes</span>
+							<span class="ms-auto">
+								<span class="right-icon">
+									<i class="bi bi-chevron-down"></i>
+								</span>
+							</span>
+						</a>   
+						
+						<div class="collapse" id="pessoas" th:classappend=" ${#strings.startsWith(#request.requestURI, '/pessoas')} ? show">
+							<ul class="navbar-nav ps-3">
+								<li>
+									<a th:href="@{/pessoas/cadastrar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-plus-square text-white"></i>
+										</span>
+										<span class="text-white">Cadastrar</span>
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/pessoas/abrirpesquisar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-search text-white"></i>
+										</span>
+										<span class="text-white">Pesquisar</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<!-- 3o elemento -->
+					<li>
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#lotes">
+							<span class="me-2">
+								<i class="bi bi-clipboard-heart-fill"></i>
+							</span>
+							<span>Pscicológos</span>
+							<span class="ms-auto">
+								<span class="right-icon">
+									<i class="bi bi-chevron-down"></i>
+								</span>
+							</span>
+						</a>
+						<div class="collapse" id="lotes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/lotes')} ? show">
+							<ul class="navbar-nav ps-3">
+								<li>
+									<a th:href="@{/lotes/abrirpesquisar}" class="nav-link px-3">
+										<span class="me-2">
+											<i class="bi bi-search text-white"></i>
+										</span>
+										<span class="text-white">Pesquisar</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!-- !offcanvas sidebar -->
+</body>
+</html>
