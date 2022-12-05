@@ -1,4 +1,4 @@
-CREATE TABLE public.paciente
+CREATE TABLE IF NOT EXISTS public.paciente
 (
     codigo bigserial NOT NULL,
     fisrtName text,
