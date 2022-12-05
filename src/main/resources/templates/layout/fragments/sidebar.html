@@ -7,7 +7,7 @@
 			<nav class="navbar-dark">
 				<ul class="navbar-nav">
 					<li>
-						<div class="small fw-bold text-uppercase px-3 mt-3">Opções</div>
+						<div class="small fw-bold text-uppercase px-3 mt-3 text-center">Opções</div>
 					</li>
 					<li class="my-2">
 						<hr class="dropdown-toggle-split" />
@@ -15,11 +15,11 @@
 
 					<!-- 1o elemento -->
 					<li>
-						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#aplicacoes">
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#consultas">
 							<span class="me-2">
 								<i class="bi bi-clock-fill"></i>
 							</span>
-							<span>Agendamentos</span>
+							<span>Consultas</span>
 							<span class="ms-auto">
 								<span class="right-icon">
 									<i class="bi bi-chevron-down"></i>
@@ -27,10 +27,10 @@
 							</span>
 						</a>   
 						
-						<div class="collapse" id="aplicacoes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/aplicacoes')} ? show">
+						<div class="collapse" id="consultas" th:classappend=" ${#strings.startsWith(#request.requestURI, '/consultas')} ? show">
 							<ul class="navbar-nav ps-3">								
 								<li>
-									<a th:href="@{/aplicacoes/abrirpesquisar}" class="nav-link px-3">
+									<a th:href="@{/consultas/abrirpesquisar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-search text-white"></i>
 										</span>
@@ -43,7 +43,7 @@
 					
 					<!-- 2o elemento -->
 					<li>
-						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#pessoas">
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#pacientes">
 							<span class="me-2">
 								<i class="bi bi-person-fill"></i>
 							</span>
@@ -55,10 +55,10 @@
 							</span>
 						</a>   
 						
-						<div class="collapse" id="pessoas" th:classappend=" ${#strings.startsWith(#request.requestURI, '/pessoas')} ? show">
+						<div class="collapse" id="pacientes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/pacientes')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/pessoas/cadastrar}" class="nav-link px-3">
+									<a th:href="@{/pacientes/cadastrar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-plus-square text-white"></i>
 										</span>
@@ -66,7 +66,7 @@
 									</a>
 								</li>
 								<li>
-									<a th:href="@{/pessoas/abrirpesquisar}" class="nav-link px-3">
+									<a th:href="@{/pacientes/abrirpesquisar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-search text-white"></i>
 										</span>
@@ -79,21 +79,21 @@
 
 					<!-- 3o elemento -->
 					<li>
-						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#lotes">
+						<a class="nav-link px-3 sidebar-link text-white" data-bs-toggle="collapse" href="#psicologos">
 							<span class="me-2">
 								<i class="bi bi-clipboard-heart-fill"></i>
 							</span>
-							<span>Pscicológos</span>
+							<span>Psicológos</span>
 							<span class="ms-auto">
 								<span class="right-icon">
 									<i class="bi bi-chevron-down"></i>
 								</span>
 							</span>
 						</a>
-						<div class="collapse" id="lotes" th:classappend=" ${#strings.startsWith(#request.requestURI, '/lotes')} ? show">
+						<div class="collapse" id="psicologos" th:classappend=" ${#strings.startsWith(#request.requestURI, '/psicologos')} ? show">
 							<ul class="navbar-nav ps-3">
 								<li>
-									<a th:href="@{/lotes/abrirpesquisar}" class="nav-link px-3">
+									<a th:href="@{/psicologos/abrirpesquisar}" class="nav-link px-3">
 										<span class="me-2">
 											<i class="bi bi-search text-white"></i>
 										</span>
