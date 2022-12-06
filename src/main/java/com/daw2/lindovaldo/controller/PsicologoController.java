@@ -1,6 +1,5 @@
 package com.daw2.lindovaldo.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +25,17 @@ import pagination.PageWrapper;
 public class PsicologoController {
 
 	@Autowired
-    private PsicologoService psicologoService;
+	private PsicologoService psicologoService;
 
-    @Autowired
-    private PsicologoRepository psicologoRepository;
-    
-    
-    @GetMapping("/abrirpesquisar")
+	@Autowired
+	private PsicologoRepository psicologoRepository;
+
+	@GetMapping("/abrirpesquisar")
 	public String abrirPesquisa() {
 		return "psicologo/pesquisar";
 	}
-    
-    @GetMapping("/pesquisar")
+
+	@GetMapping("/pesquisar")
 	public String pesquisar(PsicologoFilter filtro, Model model,
 			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
 			HttpServletRequest request) {
@@ -46,6 +44,5 @@ public class PsicologoController {
 		model.addAttribute("pagina", paginaWrapper);
 		return "psicologo/mostrartodas";
 	}
-    
-    
+
 }
