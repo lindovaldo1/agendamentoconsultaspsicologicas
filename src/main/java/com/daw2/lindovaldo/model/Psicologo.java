@@ -1,74 +1,92 @@
 package com.daw2.lindovaldo.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "psicologo")
 @DynamicUpdate
 public class Psicologo implements Serializable {
 
-    @Id
-    @SequenceGenerator(name = "generator2", sequenceName = "psicologo_code_seq", allocationSize = 1)
-    @GeneratedValue(generator = "generator2", strategy = GenerationType.SEQUENCE)
-    private Long code;
+	@Id
+	@SequenceGenerator(name = "generator2", sequenceName = "psicologo_code_seq", allocationSize = 1)
+	@GeneratedValue(generator = "generator2", strategy = GenerationType.SEQUENCE)
+	private Long codigo;
 
-    @NotNull(message = "First name is required")
-    private String firstName;
+	@NotNull(message = "Name is required")
+	private String name;
+	
+	private String cpf;
+	
+	@Enumerated(EnumType.STRING)
+	private Specialty specialty = Specialty.NONE;
 
-    @NotNull(message = "First name is required")
-    private String lastName;
+	public Long getCodigo() {
+		return codigo;
+	}
 
-    @Enumerated(EnumType.STRING)
-    private Specialty specialty = Specialty.NONE;
+	public void setCodigo(Long code) {
+		this.codigo = code;
+	}
 
-    public Long getCode() {
-        return code;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setCode(Long code) {
-        this.code = code;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public Specialty getSpecialty() {
+		return specialty;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setSpecialty(Specialty specialty) {
+		this.specialty = specialty;
+	}
 
-    public Specialty getSpecialty() {
-        return specialty;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo, cpf, name, specialty);
+	}
 
-    public void setSpecialty(Specialty specialty) {
-        this.specialty = specialty;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Psicologo other = (Psicologo) obj;
+		return Objects.equals(codigo, other.codigo) && Objects.equals(cpf, other.cpf)
+				&& Objects.equals(name, other.name) && specialty == other.specialty;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Psicologo that = (Psicologo) o;
-        return Objects.equals(code, that.code) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && specialty == that.specialty;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(code, firstName, lastName, specialty);
-    }
+	@Override
+	public String toString() {
+		return "Psicologo [codigo=" + codigo + ", name=" + name + ", cpf=" + cpf + ", specialty=" + specialty + "]";
+	}
 
 }

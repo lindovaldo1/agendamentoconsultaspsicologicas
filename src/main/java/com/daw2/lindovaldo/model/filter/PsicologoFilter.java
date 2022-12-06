@@ -4,29 +4,29 @@ import com.daw2.lindovaldo.model.Specialty;
 
 public class PsicologoFilter {
 
-    private Long code;
-    private String firstName;
-    private String lastName;
+    private Long codigo;
+    private String name;
+    private String cpf;
     private Specialty specialty;
     
     
-	public Long getCode() {
-		return code;
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setCode(Long code) {
-		this.code = code;
+	public void setCodigo(Long code) {
+		this.codigo = code;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String firstName) {
+		this.name = firstName;
+	}	
+	public String getCpf() {
+		return cpf;
 	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	public Specialty getSpecialty() {
 		return specialty;
