@@ -1,5 +1,6 @@
 package com.daw2.lindovaldo.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.PsicologoRepository;
 import com.daw2.lindovaldo.service.PsicologoService;
 
-import antlr.collections.List;
 import pagination.PageWrapper;
 
 @Controller
@@ -33,22 +33,19 @@ public class PsicologoController {
     
     
     @GetMapping("/abrirpesquisar")
-	public String abrirPesquisa(Model model) {
-		List<Psicologo> psicologo = psicologoRepository.findAll();
-		model.addAttribute("profissoes", psicologo);
-		return "pessoa/pesquisar";
+	public String abrirPesquisa() {
+		return "psicologo/pesquisar";
 	}
-	
-//	@GetMapping("/pesquisar")
-//	public String pesquisar(PsicologoFilter filtro, Model model,
-//			@PageableDefault(size = 10) 
-//    		@SortDefault(sort = "codigo", direction = Sort.Direction.ASC)
-//    		Pageable pageable, HttpServletRequest request) {
-//		
-//		Page<Psicologo> pagina = psicologoRepository.pesquisar(filtro, pageable);
-//		PageWrapper<Psicologo> paginaWrapper = new PageWrapper<>(pagina, request);
-//		model.addAttribute("pagina", paginaWrapper);
-//		return "pessoa/mostrartodas";
-//	}
+    
+    @GetMapping("/pesquisar")
+	public String pesquisar(PsicologoFilter filtro, Model model,
+			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+			HttpServletRequest request) {
+		Page<Psicologo> pagina = psicologoRepository.pesquisar(filtro, pageable);
+		PageWrapper<Psicologo> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		return "psicologo/mostrartodas";
+	}
+    
     
 }
