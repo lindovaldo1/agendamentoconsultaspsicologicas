@@ -1,6 +1,6 @@
 package com.daw2.lindovaldo.model;
 
-public enum SituationModel {
+public enum Situation {
 
     NONE("none"),
     ACCEPT("aceito"),
@@ -8,7 +8,7 @@ public enum SituationModel {
 
     private String descricao;
 
-    private SituationModel(String descricao){this.descricao=descricao;}
+    private Situation(String descricao){this.descricao=descricao;}
 
     public String getDescricao() {
         return descricao;

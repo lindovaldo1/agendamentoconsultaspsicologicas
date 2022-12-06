@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "psicologo")
+@Table(name = "paciente")
 @DynamicUpdate
-public class PsicologoModel implements Serializable {
+public class Paciente implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "generator2", sequenceName = "psicologo_code_seq", allocationSize = 1)
-    @GeneratedValue(generator = "generator2", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "generator1", sequenceName = "paciente_code_seq", allocationSize = 1)
+    @GeneratedValue(generator = "generator1", strategy = GenerationType.SEQUENCE)
     private Long code;
 
     @NotNull(message = "First name is required")
@@ -23,8 +23,8 @@ public class PsicologoModel implements Serializable {
     @NotNull(message = "First name is required")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private SpecialtyModel specialty = SpecialtyModel.NONE;
+    @NotNull(message = "CPF is required")
+    private String cpf;
 
     public Long getCode() {
         return code;
@@ -50,25 +50,36 @@ public class PsicologoModel implements Serializable {
         this.lastName = lastName;
     }
 
-    public SpecialtyModel getSpecialty() {
-        return specialty;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setSpecialty(SpecialtyModel specialty) {
-        this.specialty = specialty;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PsicologoModel that = (PsicologoModel) o;
-        return Objects.equals(code, that.code) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && specialty == that.specialty;
+        Paciente that = (Paciente) o;
+        return Objects.equals(code, that.code) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(cpf, that.cpf);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, firstName, lastName, specialty);
+        return Objects.hash(code, firstName, lastName, cpf);
+    }
+
+    @Override
+    public String toString() {
+        return "PacienteModel{" +
+                "code=" + code +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", cpf='" + cpf + '\'' +
+                '}';
     }
 
 }
+

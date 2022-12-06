@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "consulta")
 @DynamicUpdate
-public class ConsultaModel {
+public class Consulta {
 
     @Id
     @SequenceGenerator(name = "generator3", sequenceName = "consulta_code_seq", allocationSize = 1)
@@ -18,16 +18,16 @@ public class ConsultaModel {
 
     @ManyToOne
     @JoinColumn(name="codigo_paciente")
-    private PacienteModel paciente;
+    private Paciente paciente;
 
     @ManyToOne
     @JoinColumn(name="codigo_psicologo")
-    private PsicologoModel psicologo;
+    private Psicologo psicologo;
 
     private LocalDateTime consultedTime;
 
     @Enumerated(EnumType.STRING)
-    private SituationModel situation = SituationModel.NONE;
+    private Situation situation = Situation.NONE;
 
     public Long getCode() {
         return code;
@@ -37,19 +37,19 @@ public class ConsultaModel {
         this.code = code;
     }
 
-    public PacienteModel getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(PacienteModel paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
-    public PsicologoModel getPsicologo() {
+    public Psicologo getPsicologo() {
         return psicologo;
     }
 
-    public void setPsicologo(PsicologoModel psicologo) {
+    public void setPsicologo(Psicologo psicologo) {
         this.psicologo = psicologo;
     }
 
@@ -61,11 +61,11 @@ public class ConsultaModel {
         this.consultedTime = consultedTime;
     }
 
-    public SituationModel getSituation() {
+    public Situation getSituation() {
         return situation;
     }
 
-    public void setSituation(SituationModel situation) {
+    public void setSituation(Situation situation) {
         this.situation = situation;
     }
 
@@ -73,7 +73,7 @@ public class ConsultaModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ConsultaModel that = (ConsultaModel) o;
+        Consulta that = (Consulta) o;
         return Objects.equals(code, that.code) && Objects.equals(paciente, that.paciente) && Objects.equals(psicologo, that.psicologo) && Objects.equals(consultedTime, that.consultedTime) && situation == that.situation;
     }
 
