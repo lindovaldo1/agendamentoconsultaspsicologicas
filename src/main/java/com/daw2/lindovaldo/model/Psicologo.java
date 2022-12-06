@@ -26,10 +26,10 @@ public class Psicologo implements Serializable {
 	private Long codigo;
 
 	@NotNull(message = "Name is required")
-	private String name;
-	
+	private String nome;
+
 	private String cpf;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Specialty specialty = Specialty.NONE;
 
@@ -41,15 +41,14 @@ public class Psicologo implements Serializable {
 		this.codigo = code;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	
 	public String getCpf() {
 		return cpf;
 	}
@@ -68,7 +67,7 @@ public class Psicologo implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, cpf, name, specialty);
+		return Objects.hash(codigo, cpf, nome, specialty);
 	}
 
 	@Override
@@ -81,12 +80,12 @@ public class Psicologo implements Serializable {
 			return false;
 		Psicologo other = (Psicologo) obj;
 		return Objects.equals(codigo, other.codigo) && Objects.equals(cpf, other.cpf)
-				&& Objects.equals(name, other.name) && specialty == other.specialty;
+				&& Objects.equals(nome, other.nome) && specialty == other.specialty;
 	}
 
 	@Override
 	public String toString() {
-		return "Psicologo [codigo=" + codigo + ", name=" + name + ", cpf=" + cpf + ", specialty=" + specialty + "]";
+		return "Psicologo [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", specialty=" + specialty + "]";
 	}
 
 }
