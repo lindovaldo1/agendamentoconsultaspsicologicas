@@ -44,8 +44,7 @@
               <td th:text="${p.nome}"></td>
               <td th:text="${p.cpf}"></td>
               <td th:text="${p.specialty}"></td>
-            </tr>
-            <!-- <td>
+              <td>
                 <form th:action="@{/psicologos/abriralterar}" method="post">
                   <input type="hidden" name="codigo" th:value="${p.codigo}" />
                   <input type="hidden" name="nome" th:value="${p.nome}" />
@@ -63,8 +62,8 @@
                     <i class="bi bi-pencil-fill"></i>
                   </button>
                 </form>
-              </td> -->
-            <!-- <td>
+              </td>
+              <td>
                 <form th:action="@{/psicologos/abrirremover}" method="post">
                   <input type="hidden" name="codigo" th:value="${p.codigo}" />
                   <input type="hidden" name="nome" th:value="${p.nome}" />
@@ -78,7 +77,8 @@
                   </button>
                 </form>
               </td> 
-            </tr>-->
+            </tr>
+            </tr>
           </tbody>
         </table>
 
