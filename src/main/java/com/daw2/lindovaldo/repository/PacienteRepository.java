@@ -1,6 +1,6 @@
 package com.daw2.lindovaldo.repository;
 
-import com.daw2.lindovaldo.model.PacienteModel;
+import com.daw2.lindovaldo.model.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PacienteRepository extends JpaRepository<PacienteModel, Long>{}
+public interface PacienteRepository extends JpaRepository<Paciente, Long>{}
