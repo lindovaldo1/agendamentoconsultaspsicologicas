@@ -5,7 +5,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "paciente")
@@ -15,39 +14,28 @@ public class Paciente implements Serializable {
     @Id
     @SequenceGenerator(name = "generator1", sequenceName = "paciente_code_seq", allocationSize = 1)
     @GeneratedValue(generator = "generator1", strategy = GenerationType.SEQUENCE)
-    private Long code;
+    private Long codigo;
 
     @NotNull(message = "First name is required")
-    private String firstName;
-
-    @NotNull(message = "First name is required")
-    private String lastName;
+    private String nome;
 
     @NotNull(message = "CPF is required")
     private String cpf;
 
-    public Long getCode() {
-        return code;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setCode(Long code) {
-        this.code = code;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNome() {
+        return nome;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -59,27 +47,45 @@ public class Paciente implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Paciente that = (Paciente) o;
-        return Objects.equals(code, that.code) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(cpf, that.cpf);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(code, firstName, lastName, cpf);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Paciente other = (Paciente) obj;
+        if (codigo == null) {
+            if (other.codigo != null)
+                return false;
+        } else if (!codigo.equals(other.codigo))
+            return false;
+        if (nome == null) {
+            if (other.nome != null)
+                return false;
+        } else if (!nome.equals(other.nome))
+            return false;
+        if (cpf == null) {
+            if (other.cpf != null)
+                return false;
+        } else if (!cpf.equals(other.cpf))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "PacienteModel{" +
-                "code=" + code +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", cpf='" + cpf + '\'' +
-                '}';
+        return "Paciente [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + "]";
     }
 
 }
-
