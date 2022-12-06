@@ -1,6 +1,5 @@
 package com.daw2.lindovaldo.repository.helper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,15 +20,14 @@ import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.pagination.PaginacaoUtil;
 
-
-public class PsicologoQueriesImpl implements PsicologoQueries{
+public class PsicologoQueriesImpl implements PsicologoQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
 	public Page<Psicologo> pesquisar(PsicologoFilter filtro, Pageable pageable) {
-		
+
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<Psicologo> criteriaQuery = builder.createQuery(Psicologo.class);
 		Root<Psicologo> p = criteriaQuery.from(Psicologo.class);
@@ -37,18 +35,18 @@ public class PsicologoQueriesImpl implements PsicologoQueries{
 		List<Predicate> predicateList = new ArrayList<>();
 
 		if (filtro.getCodigo() != null) {
-			predicateList.add(builder.equal(p.<Long>get("codigo"), 
-		                 filtro.getCodigo()));
+			predicateList.add(builder.equal(p.<Long>get("codigo"),
+					filtro.getCodigo()));
 		}
 		if (StringUtils.hasText(filtro.getName())) {
-			predicateList.add(builder.like(	builder.lower(p.<String>get("nome")),
-										"%" + filtro.getName().toLowerCase() + "%"));
+			predicateList.add(builder.like(builder.lower(p.<String>get("nome")),
+					"%" + filtro.getName().toLowerCase() + "%"));
 		}
 		if (StringUtils.hasText(filtro.getCpf())) {
-			predicateList.add(builder.like(	builder.lower(p.<String>get("cpf")),
-										"%" + filtro.getName().toLowerCase() + "%"));
+			predicateList.add(builder.like(builder.lower(p.<String>get("cpf")),
+					"%" + filtro.getCpf().toLowerCase() + "%"));
 		}
-				
+
 		Predicate[] predArray = new Predicate[predicateList.size()];
 		predicateList.toArray(predArray);
 
@@ -56,14 +54,14 @@ public class PsicologoQueriesImpl implements PsicologoQueries{
 		PaginacaoUtil.prepararOrdem(p, criteriaQuery, builder, pageable);
 		typedQuery = manager.createQuery(criteriaQuery);
 		PaginacaoUtil.prepararIntervalo(typedQuery, pageable);
-								
+
 		List<Psicologo> psicologos = typedQuery.getResultList();
-		
+
 		long totalPsicologs = PaginacaoUtil.getTotalRegistros(p, predArray, builder, manager);
 
-		Page<Psicologo> page = new PageImpl<>(psicologos, pageable, totalPsicologs); 
-		
+		Page<Psicologo> page = new PageImpl<>(psicologos, pageable, totalPsicologs);
+
 		return page;
 	}
-	
+
 }
