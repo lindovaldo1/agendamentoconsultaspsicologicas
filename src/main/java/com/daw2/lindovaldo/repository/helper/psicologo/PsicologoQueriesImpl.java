@@ -47,12 +47,11 @@ public class PsicologoQueriesImpl implements PsicologoQueries {
 			predicateList.add(builder.like(builder.lower(p.<String>get("cpf")),
 					"%" + filtro.getCpf().toLowerCase() + "%"));
 		}
-		String especialidade = filtro.getSpecialty().name();
-		if (StringUtils.hasText(especialidade)) {
+		if (StringUtils.hasText(filtro.getSpecialty())) {
 			predicateList.add(builder.equal(p.<Specialty>get("specialty"),
-					Specialty.valueOf(filtro.getSpecialty().name())));
-		}
+					Specialty.valueOf(filtro.getSpecialty().toUpperCase())));
 
+		}
 		Predicate[] predArray = new Predicate[predicateList.size()];
 		predicateList.toArray(predArray);
 
