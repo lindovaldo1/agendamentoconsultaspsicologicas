@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import com.daw2.lindovaldo.model.Psicologo;
+import com.daw2.lindovaldo.model.Specialty;
 import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.pagination.PaginacaoUtil;
 
@@ -45,6 +46,11 @@ public class PsicologoQueriesImpl implements PsicologoQueries {
 		if (StringUtils.hasText(filtro.getCpf())) {
 			predicateList.add(builder.like(builder.lower(p.<String>get("cpf")),
 					"%" + filtro.getCpf().toLowerCase() + "%"));
+		}
+		String especialidade = filtro.getSpecialty().name();
+		if (StringUtils.hasText(especialidade)) {
+			predicateList.add(builder.equal(p.<Specialty>get("specialty"),
+					Specialty.valueOf(filtro.getSpecialty().name())));
 		}
 
 		Predicate[] predArray = new Predicate[predicateList.size()];
