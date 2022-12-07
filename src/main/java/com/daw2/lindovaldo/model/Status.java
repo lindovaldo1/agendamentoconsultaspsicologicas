@@ -1,14 +1,16 @@
 package com.daw2.lindovaldo.model;
 
-public enum Situation {
+public enum Status {
 
     NONE("none"),
-    ACCEPT("aceito"),
-    NOT_ACCEPT("não aceito");
+    ATIVO("ativo"),
+    INATIVO("inativo");
 
     private String descricao;
 
-    private Situation(String descricao){this.descricao=descricao;}
+    private Status(String descricao) {
+        this.descricao = descricao;
+    }
 
     public String getDescricao() {
         return descricao;
