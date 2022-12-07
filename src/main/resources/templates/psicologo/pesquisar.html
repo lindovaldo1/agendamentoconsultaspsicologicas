@@ -52,16 +52,17 @@
                 placeholder="Digite o cpf do psicológo"
               />
             </div>
-            <!-- <div class="mb-3">
-              <label for="lastnome" class="form-label">Especialidade</label>
-              <input
-                type="text"
-                class="form-control"
-                name="specialty"
-                id="specialty"
-                placeholder="Digite a especialidade do psicológo"
-              />
-            </div> -->
+            <div class="mb-3">
+              <label for="specialty" class="form-label">Especialidade</label>
+              <select class="form-select" name="specialty">
+                <option value="" selected="selected">Não selecionada</option>
+                <option
+                  th:each="specialty : ${T(com.daw2.lindovaldo.model.Specialty).values()}"
+                  th:value="${specialty}"
+                  th:text="${specialty.descricao}"
+                ></option>
+              </select>
+            </div>
 
             <button type="submit" class="btn btn-primary">Pesquisar</button>
           </div>

@@ -43,7 +43,7 @@
               <td th:text="${p.codigo}"></td>
               <td th:text="${p.nome}"></td>
               <td th:text="${p.cpf}"></td>
-              <td th:text="${p.specialty}"></td>
+              <td th:text="${p.specialty.descricao}"></td>
               <td>
                 <form th:action="@{/psicologos/abriralterar}" method="post">
                   <input type="hidden" name="codigo" th:value="${p.codigo}" />
