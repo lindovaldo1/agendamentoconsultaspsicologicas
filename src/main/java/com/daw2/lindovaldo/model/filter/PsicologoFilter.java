@@ -7,7 +7,7 @@ public class PsicologoFilter {
 	private Long codigo;
 	private String nome;
 	private String cpf;
-	private Specialty specialty;
+	private String specialty;
 
 	public Long getCodigo() {
 		return codigo;
@@ -33,11 +33,11 @@ public class PsicologoFilter {
 		this.cpf = cpf;
 	}
 
-	public Specialty getSpecialty() {
+	public String getSpecialty() {
 		return specialty;
 	}
 
-	public void setSpecialty(Specialty specialty) {
+	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 	}
 
