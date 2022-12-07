@@ -58,12 +58,31 @@ public class PacienteController {
     @PostMapping("/cadastrar")
     public String cadastrar(Paciente paciente) {
         pacienteService.salvar(paciente);
-        return "redirect:/paciente/cadastro/sucesso";
+        return "redirect:/pacientes/cadastrar/sucesso";
     }
 
-    @GetMapping("/cadastro/sucesso")
+    @GetMapping("/cadastrar/sucesso")
     public String mostrarMensagemCadastroSucesso(Model model) {
         model.addAttribute("mensagem", "Cadastro de Paciente efetuado com sucesso.");
+        return "mostrarmensagem";
+    }
+
+    @PostMapping("/abriralterar")
+    public String abrirAlterar(Paciente paciente, Model model) {
+        List<Paciente> pacientes = pacienteRepository.findAll();
+        model.addAttribute("pacientes", pacientes);
+        return "paciente/alterar";
+    }
+
+    @PostMapping("/alterar")
+    public String alterar(Paciente paciente) {
+        pacienteService.alterar(paciente);
+        return "redirect:/pacientes/alterar/sucesso";
+    }
+
+    @GetMapping("/alterar/sucesso")
+    public String mostrarMensagemAlterarSucesso(Model model) {
+        model.addAttribute("mensagem", "Alteração do Paciente efetuada com sucesso.");
         return "mostrarmensagem";
     }
 
