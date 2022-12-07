@@ -5,6 +5,7 @@ public class PacienteFilter {
 	private Long codigo;
 	private String nome;
 	private String cpf;
+	private String status;
 
 	public Long getCodigo() {
 		return codigo;
@@ -30,4 +31,11 @@ public class PacienteFilter {
 		this.cpf = cpf;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

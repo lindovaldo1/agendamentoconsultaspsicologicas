@@ -22,6 +22,9 @@ public class Paciente implements Serializable {
     @NotNull(message = "CPF is required")
     private String cpf;
 
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ATIVO;
+
     public Long getCodigo() {
         return codigo;
     }
@@ -46,6 +49,14 @@ public class Paciente implements Serializable {
         this.cpf = cpf;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -53,6 +64,7 @@ public class Paciente implements Serializable {
         result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((status == null) ? 0 : status.hashCode());
         return result;
     }
 
@@ -80,12 +92,14 @@ public class Paciente implements Serializable {
                 return false;
         } else if (!cpf.equals(other.cpf))
             return false;
+        if (status != other.status)
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Paciente [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + "]";
+        return "Paciente [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", status=" + status + "]";
     }
 
 }
