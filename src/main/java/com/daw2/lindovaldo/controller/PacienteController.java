@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daw2.lindovaldo.model.Paciente;
+import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.PacienteFilter;
 import com.daw2.lindovaldo.repository.PacienteRepository;
 import com.daw2.lindovaldo.service.PacienteService;
@@ -50,7 +51,7 @@ public class PacienteController {
 
     @GetMapping("/cadastrar")
     public String abrirCadastro(Paciente paciente, Model model) {
-        List<Paciente> pacientes = pacienteRepository.findAll();
+        List<Paciente> pacientes = pacienteRepository.findByStatus(Status.ATIVO);
         model.addAttribute("pacientes", pacientes);
         return "paciente/cadastrar";
     }
@@ -83,6 +84,24 @@ public class PacienteController {
     @GetMapping("/alterar/sucesso")
     public String mostrarMensagemAlterarSucesso(Model model) {
         model.addAttribute("mensagem", "Alteração do Paciente efetuada com sucesso.");
+        return "mostrarmensagem";
+    }
+
+    @PostMapping("/abrirremover")
+    public String abrirRemover(Paciente paciente) {
+        return "paciente/remover";
+    }
+
+    @PostMapping("/remover")
+    public String remover(Paciente paciente) {
+        paciente.setStatus(Status.INATIVO);
+        pacienteService.alterar(paciente);
+        return "redirect:/pacientes/remover/sucesso";
+    }
+
+    @GetMapping("/remover/sucesso")
+    public String mostrarMensagemRemoverSucesso(Model model) {
+        model.addAttribute("mensagem", "Remoção (INATIVO) de Pessoa efetuada com sucesso.");
         return "mostrarmensagem";
     }
 
