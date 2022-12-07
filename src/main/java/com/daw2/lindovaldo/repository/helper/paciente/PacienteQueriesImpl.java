@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import com.daw2.lindovaldo.model.Paciente;
+import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.PacienteFilter;
 import com.daw2.lindovaldo.repository.pagination.PaginacaoUtil;
 
@@ -46,6 +47,8 @@ public class PacienteQueriesImpl implements PacienteQueries {
 			predicateList.add(builder.like(builder.lower(p.<String>get("cpf")),
 					"%" + filtro.getCpf().toLowerCase() + "%"));
 		}
+		predicateList.add(builder.equal(p.<Status>get("status"),
+				Status.ATIVO));
 
 		Predicate[] predArray = new Predicate[predicateList.size()];
 		predicateList.toArray(predArray);
