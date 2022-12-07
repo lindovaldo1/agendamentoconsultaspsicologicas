@@ -1,5 +1,7 @@
 package com.daw2.lindovaldo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,11 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daw2.lindovaldo.model.Paciente;
+import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.PacienteFilter;
 import com.daw2.lindovaldo.repository.PacienteRepository;
 import com.daw2.lindovaldo.service.PacienteService;
@@ -43,6 +47,25 @@ public class PacienteController {
         PageWrapper<Paciente> paginaWrapper = new PageWrapper<>(pagina, request);
         model.addAttribute("pagina", paginaWrapper);
         return "paciente/mostrartodas";
+    }
+
+    @GetMapping("/cadastrar")
+    public String abrirCadastro(Paciente paciente, Model model) {
+        List<Paciente> pacientes = pacienteRepository.findAll();
+        model.addAttribute("pacientes", pacientes);
+        return "paciente/cadastrar";
+    }
+
+    @PostMapping("/cadastrar")
+    public String cadastrar(Paciente paciente) {
+        pacienteService.salvar(paciente);
+        return "redirect:/paciente/cadastro/sucesso";
+    }
+
+    @GetMapping("/cadastro/sucesso")
+    public String mostrarMensagemCadastroSucesso(Model model) {
+        model.addAttribute("mensagem", "Cadastro de Paciente efetuado com sucesso.");
+        return "mostrarmensagem";
     }
 
 }
