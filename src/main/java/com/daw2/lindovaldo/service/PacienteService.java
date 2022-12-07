@@ -17,4 +17,9 @@ public class PacienteService {
         pacienteRepository.save(paciente);
     }
 
+    @Transactional
+    public void alterar(Paciente paciente) {
+        pacienteRepository.save(paciente);
+    }
+
 }
