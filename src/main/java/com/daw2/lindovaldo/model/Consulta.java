@@ -17,17 +17,17 @@ public class Consulta {
     private Long code;
 
     @ManyToOne
-    @JoinColumn(name="codigo_paciente")
+    @JoinColumn(name = "codigo_paciente")
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name="codigo_psicologo")
+    @JoinColumn(name = "codigo_psicologo")
     private Psicologo psicologo;
 
     private LocalDateTime consultedTime;
 
     @Enumerated(EnumType.STRING)
-    private Situation situation = Situation.NONE;
+    private Status situation = Status.NONE;
 
     public Long getCode() {
         return code;
@@ -61,20 +61,24 @@ public class Consulta {
         this.consultedTime = consultedTime;
     }
 
-    public Situation getSituation() {
+    public Status getSituation() {
         return situation;
     }
 
-    public void setSituation(Situation situation) {
+    public void setSituation(Status situation) {
         this.situation = situation;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Consulta that = (Consulta) o;
-        return Objects.equals(code, that.code) && Objects.equals(paciente, that.paciente) && Objects.equals(psicologo, that.psicologo) && Objects.equals(consultedTime, that.consultedTime) && situation == that.situation;
+        return Objects.equals(code, that.code) && Objects.equals(paciente, that.paciente)
+                && Objects.equals(psicologo, that.psicologo) && Objects.equals(consultedTime, that.consultedTime)
+                && situation == that.situation;
     }
 
     @Override

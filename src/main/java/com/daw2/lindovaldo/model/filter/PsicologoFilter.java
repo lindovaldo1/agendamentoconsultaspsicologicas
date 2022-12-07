@@ -1,7 +1,5 @@
 package com.daw2.lindovaldo.model.filter;
 
-import com.daw2.lindovaldo.model.Specialty;
-
 public class PsicologoFilter {
 
 	private Long codigo;

@@ -17,9 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import com.daw2.lindovaldo.model.Paciente;
-import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.filter.PacienteFilter;
-import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.pagination.PaginacaoUtil;
 
 public class PacienteQueriesImpl implements PacienteQueries {

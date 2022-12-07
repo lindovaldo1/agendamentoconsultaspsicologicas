@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.daw2.lindovaldo.model.Paciente;
-import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.PacienteFilter;
 import com.daw2.lindovaldo.repository.PacienteRepository;
 import com.daw2.lindovaldo.service.PacienteService;
