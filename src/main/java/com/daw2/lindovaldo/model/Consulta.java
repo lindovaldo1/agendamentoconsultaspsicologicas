@@ -3,8 +3,8 @@ package com.daw2.lindovaldo.model;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Objects;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "consulta")
@@ -14,7 +14,7 @@ public class Consulta {
     @Id
     @SequenceGenerator(name = "generator3", sequenceName = "consulta_code_seq", allocationSize = 1)
     @GeneratedValue(generator = "generator3", strategy = GenerationType.SEQUENCE)
-    private Long code;
+    private Long codigo;
 
     @ManyToOne
     @JoinColumn(name = "codigo_paciente")
@@ -24,17 +24,23 @@ public class Consulta {
     @JoinColumn(name = "codigo_psicologo")
     private Psicologo psicologo;
 
-    private LocalDateTime consultedTime;
+    @Column(name = "data")
+    private LocalDate consulteDate;
 
+    @Column(name = "horario")
     @Enumerated(EnumType.STRING)
-    private Status situation = Status.NONE;
+    private Horario hora;
 
-    public Long getCode() {
-        return code;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ATIVO;
+
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setCode(Long code) {
-        this.code = code;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public Paciente getPaciente() {
@@ -53,36 +59,83 @@ public class Consulta {
         this.psicologo = psicologo;
     }
 
-    public LocalDateTime getConsultedTime() {
-        return consultedTime;
+    public LocalDate getConsulteDate() {
+        return consulteDate;
     }
 
-    public void setConsultedTime(LocalDateTime consultedTime) {
-        this.consultedTime = consultedTime;
+    public void setConsulteDate(LocalDate consulteDate) {
+        this.consulteDate = consulteDate;
     }
 
-    public Status getSituation() {
-        return situation;
+    public Horario getHora() {
+        return hora;
     }
 
-    public void setSituation(Status situation) {
-        this.situation = situation;
+    public void setHora(Horario hora) {
+        this.hora = hora;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Consulta that = (Consulta) o;
-        return Objects.equals(code, that.code) && Objects.equals(paciente, that.paciente)
-                && Objects.equals(psicologo, that.psicologo) && Objects.equals(consultedTime, that.consultedTime)
-                && situation == that.situation;
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, paciente, psicologo, consultedTime, situation);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
+        result = prime * result + ((psicologo == null) ? 0 : psicologo.hashCode());
+        result = prime * result + ((consulteDate == null) ? 0 : consulteDate.hashCode());
+        result = prime * result + ((hora == null) ? 0 : hora.hashCode());
+        result = prime * result + ((status == null) ? 0 : status.hashCode());
+        return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Consulta other = (Consulta) obj;
+        if (codigo == null) {
+            if (other.codigo != null)
+                return false;
+        } else if (!codigo.equals(other.codigo))
+            return false;
+        if (paciente == null) {
+            if (other.paciente != null)
+                return false;
+        } else if (!paciente.equals(other.paciente))
+            return false;
+        if (psicologo == null) {
+            if (other.psicologo != null)
+                return false;
+        } else if (!psicologo.equals(other.psicologo))
+            return false;
+        if (consulteDate == null) {
+            if (other.consulteDate != null)
+                return false;
+        } else if (!consulteDate.equals(other.consulteDate))
+            return false;
+        if (hora != other.hora)
+            return false;
+        if (status != other.status)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Consulta [codigo=" + codigo + ", paciente=" + paciente + ", psicologo=" + psicologo + ", consulteDate="
+                + consulteDate + ", hora=" + hora + ", status=" + status + "]";
+    }
+
 }
