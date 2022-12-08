@@ -31,7 +31,7 @@ public class Psicologo implements Serializable {
 	private String cpf;
 
 	@Enumerated(EnumType.STRING)
-	private Specialty specialty = Specialty.NONE;
+	private Specialty specialty;
 
 	public Long getCodigo() {
 		return codigo;
