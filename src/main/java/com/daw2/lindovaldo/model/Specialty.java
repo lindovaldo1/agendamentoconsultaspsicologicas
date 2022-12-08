@@ -2,7 +2,6 @@ package com.daw2.lindovaldo.model;
 
 public enum Specialty {
 
-    NONE("não selecionado"),
     PSICOLOGIA_SOCIAL("Psicologia Social"),
     NEUROPSICOLOGIA("Neuropsicologia"),
     PSICOLOGIA_SAUDE("Psicologia em Saúde");

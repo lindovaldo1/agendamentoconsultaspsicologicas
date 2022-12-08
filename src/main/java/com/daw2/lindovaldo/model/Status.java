@@ -2,7 +2,6 @@ package com.daw2.lindovaldo.model;
 
 public enum Status {
 
-    NONE("none"),
     ATIVO("ativo"),
     INATIVO("inativo");
 
