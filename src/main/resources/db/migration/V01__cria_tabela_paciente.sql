@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS public.paciente
 (
-    codigo bigserial NOT NULL,
-    nome text,
-    cpf text,
-    status text DEFAULT 'ATIVO',
+    codigo BIGSERIAL NOT NULL,
+    nome TEXT NOT NULL,
+    cpf TEXT NOT NULL,
+    status TEXT DEFAULT 'ATIVO',
     PRIMARY KEY (codigo)
 );

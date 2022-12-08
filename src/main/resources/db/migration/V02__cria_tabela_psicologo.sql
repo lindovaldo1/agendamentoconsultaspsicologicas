@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS public.psicologo
 (
     codigo bigserial NOT NULL,
-    nome text,
-    cpf text,
-    specialty text DEFAULT 'NONE',
+    nome text NOT NULL,
+    cpf text NOT NULL,
+    specialty text,
     PRIMARY KEY (codigo)
 );
 
