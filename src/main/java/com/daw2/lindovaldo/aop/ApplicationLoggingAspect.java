@@ -1,4 +1,4 @@
-package web.controlevacinacao.aop;
+package com.daw2.lindovaldo.aop;
 
 import java.util.HashMap;
 import java.util.Map;
