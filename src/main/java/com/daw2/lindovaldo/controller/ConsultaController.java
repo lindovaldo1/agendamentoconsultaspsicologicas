@@ -1,5 +1,8 @@
 package com.daw2.lindovaldo.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.daw2.lindovaldo.model.Consulta;
+import com.daw2.lindovaldo.model.Horario;
 import com.daw2.lindovaldo.model.Paciente;
 import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.Status;
@@ -128,5 +132,19 @@ public class ConsultaController {
 		return "mostrarmensagem";
 	}
 	
+	@GetMapping("/abrirescolherdiahora")
+	public String abrirEscolhaDiaHora() {
+		return "consulta/escolherdiahora";
+	}
 
+	@PostMapping("/escolherdiahora")
+	public String escolherDiaHora(Horario horario, Date consulteDate, HttpSession sessao) {
+		LocalDate date = consulteDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Consulta consulta = buscarConsultaNaSessao(sessao);
+		consulta.setHora(horario);
+		consulta.setConsulteDate(date);
+		System.out.println(consulta.toString());
+		sessao.setAttribute("consulta", consulta);
+		return "consulta/cadastrar";
+	}
 }
