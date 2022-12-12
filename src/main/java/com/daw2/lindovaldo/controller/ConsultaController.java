@@ -3,6 +3,7 @@ package com.daw2.lindovaldo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,11 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.daw2.lindovaldo.model.Consulta;
+import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.ConsultaFilter;
+import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.ConsultaRepository;
+import com.daw2.lindovaldo.repository.PsicologoRepository;
 import com.daw2.lindovaldo.service.ConsultaService;
 
 import pagination.PageWrapper;
@@ -34,75 +39,91 @@ public class ConsultaController {
     @Autowired
     private ConsultaService consultaService;
 
-    @GetMapping("/abrirpesquisar")
-    public String abrirPesquisa() {
-        return "consulta/pesquisar";
-    }
-
-    @GetMapping("/pesquisar")
-    public String pesquisar(ConsultaFilter filtro, Model model,
-            @PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
-            HttpServletRequest request) {
-        Page<Consulta> pagina = consultaRepository.pesquisar(filtro, pageable);
-        PageWrapper<Consulta> paginaWrapper = new PageWrapper<>(pagina, request);
-        model.addAttribute("pagina", paginaWrapper);
-        return "consulta/mostrartodas";
-    }
+    @Autowired
+    private PsicologoRepository psicologoRepository;
 
     @GetMapping("/cadastrar")
-    public String abrirCadastro(Consulta consulta, Model model) {
-        List<Consulta> consultas = consultaRepository.findByStatus(Status.ATIVO);
-        model.addAttribute("consultas", consultas);
-        return "paciente/cadastrar";
-    }
+	public String abrirCadastro(HttpSession sessao) {
+		Consulta consulta = buscarConsultaNaSessao(sessao);
+		sessao.setAttribute("consulta", consulta);
+		return "consulta/cadastrar";
+	}
 
-    @PostMapping("/cadastrar")
-    public String cadastrar(Consulta consulta) {
-        consultaService.salvar(consulta);
-        return "redirect:/consultas/cadastrar/sucesso";
-    }
 
-    @GetMapping("/cadastrar/sucesso")
-    public String mostrarMensagemCadastroSucesso(Model model) {
-        model.addAttribute("mensagem", "Cadastro da Consulta efetuado com sucesso.");
-        return "mostrarmensagem";
-    }
-
-    @PostMapping("/abriralterar")
-    public String abrirAlterar(Consulta consulta, Model model) {
-        List<Consulta> consultas = consultaRepository.findAll();
-        model.addAttribute("consultas", consultas);
-        return "consulta/alterar";
-    }
-
-    @PostMapping("/alterar")
-    public String alterar(Consulta consulta) {
-        consultaService.alterar(consulta);
-        return "redirect:/consultas/alterar/sucesso";
-    }
-
-    @GetMapping("/alterar/sucesso")
-    public String mostrarMensagemAlterarSucesso(Model model) {
-        model.addAttribute("mensagem", "Alteração da Consulta efetuada com sucesso.");
-        return "mostrarmensagem";
-    }
-
-    @PostMapping("/abrirremover")
-    public String abrirRemover(Consulta consulta) {
-        return "consulta/remover";
-    }
-
-    @PostMapping("/remover")
-    public String remover(Consulta consulta) {
-        consulta.setStatus(Status.INATIVO);
-        consultaService.alterar(consulta);
-        return "redirect:/consultas/remover/sucesso";
-    }
-
-    @GetMapping("/remover/sucesso")
-    public String mostrarMensagemRemoverSucesso(Model model) {
-        model.addAttribute("mensagem", "Remoção (INATIVO) de Consulta efetuada com sucesso.");
-        return "mostrarmensagem";
-    }
+    private Consulta buscarConsultaNaSessao(HttpSession sessao) {
+		Consulta consulta = (Consulta) sessao.getAttribute("consulta");
+		if (consulta == null) {
+			consulta = new Consulta();
+		}
+		return consulta;
+	}
+	
+	@GetMapping("/abrirescolherpsicologo")
+	public String abrirEscolhaPsicologo() {
+		return "consulta/escolherpsicologo";
+	}
+	
+	@GetMapping("/pesquisarpsicologo")
+	public String pesquisarPessoa(PsicologoFilter filtro, Model model,
+			@PageableDefault(size = 10) 
+    		@SortDefault(sort = "codigo", direction = Sort.Direction.ASC)
+    		Pageable pageable, HttpServletRequest request) {
+		
+		Page<Psicologo> pagina = psicologoRepository.pesquisar(filtro, pageable);
+		PageWrapper<Psicologo> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		
+		return "consulta/mostrarpsicologo";
+	}
+	
+	@PostMapping("/escolherpsicologo")
+	public String escolherPsicologo(Psicologo psicologo, HttpSession sessao) {
+		Consulta consulta = buscarConsultaNaSessao(sessao);
+		consulta.setPsicologo(psicologo);
+		sessao.setAttribute("consulta", consulta);
+		return "consulta/cadastrar";
+	}
+		
+	// @GetMapping("/abrirescolherlote")
+	// public String abrirEscolhaLote() {
+	// 	return "aplicacao/escolherlote";
+	// }
+	
+	// @GetMapping("/pesquisarlote")
+	// public String pesquisarLote(LoteFilter filtro, Model model,
+	// 		@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+	// 		HttpServletRequest request) {
+	// 	Page<Lote> pagina = loteRepository.pesquisar(filtro, pageable, true);
+	// 	PageWrapper<Lote> paginaWrapper = new PageWrapper<>(pagina, request);
+	// 	model.addAttribute("pagina", paginaWrapper);
+	// 	return "aplicacao/mostrarlotes";
+	// }
+	
+	// @PostMapping("/escolherlote")
+	// public String escolherLote(Lote lote, HttpSession sessao) {
+	// 	Aplicacao aplicacao = buscarAplicacaoNaSessao(sessao);
+	// 	aplicacao.setLote(lote);
+	// 	sessao.setAttribute("aplicacao", aplicacao);
+	// 	return "aplicacao/cadastrar";
+	// }
+	
+	// @GetMapping("/efetuarcadastro")
+	// public String cadastrar(HttpSession sessao, SessionStatus status) {
+	// 	Consulta consulta = buscarConsultaNaSessao(sessao);
+	// 	consulta.setData(LocalDate.now());
+	// 	consultaService.salvar(consulta);
+	// 	consulta.getLote().setNroDosesAtual(consulta.getLote().getNroDosesAtual() - 1);
+	// 	loteService.alterar(consulta.getLote());
+	// 	status.setComplete();
+	// 	sessao.invalidate();
+	// 	return "redirect:/consultas/cadastro/sucesso";
+	// }
+	
+	@GetMapping("/cadastro/sucesso")
+	public String mostrarMensagemCadastroSucesso(Model model) {
+		model.addAttribute("mensagem", "Agendamento de Consulta efetuado com sucesso.");
+		return "mostrarmensagem";
+	}
+	
 
 }
