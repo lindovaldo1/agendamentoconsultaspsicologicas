@@ -40,6 +40,8 @@ public class CosultaSessionFilter implements Filter {
                 if (consulta != null) {
                     consulta.setPsicologo(null);
                     consulta.setPaciente(null);
+                    consulta.setConsulteDate(null);
+                    consulta.setHora(null);
                     sessao.setAttribute("consulta", null);
                     logger.info("Limpou a consulta da sessao atual.");
                 }
