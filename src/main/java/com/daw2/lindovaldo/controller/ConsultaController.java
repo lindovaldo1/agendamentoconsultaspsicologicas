@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.daw2.lindovaldo.model.Consulta;
+import com.daw2.lindovaldo.model.Paciente;
 import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.ConsultaFilter;
+import com.daw2.lindovaldo.model.filter.PacienteFilter;
 import com.daw2.lindovaldo.model.filter.PsicologoFilter;
 import com.daw2.lindovaldo.repository.ConsultaRepository;
+import com.daw2.lindovaldo.repository.PacienteRepository;
 import com.daw2.lindovaldo.repository.PsicologoRepository;
 import com.daw2.lindovaldo.service.ConsultaService;
 
@@ -41,6 +44,9 @@ public class ConsultaController {
 
     @Autowired
     private PsicologoRepository psicologoRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
 
     @GetMapping("/cadastrar")
 	public String abrirCadastro(HttpSession sessao) {
@@ -84,40 +90,37 @@ public class ConsultaController {
 		return "consulta/cadastrar";
 	}
 		
-	// @GetMapping("/abrirescolherlote")
-	// public String abrirEscolhaLote() {
-	// 	return "aplicacao/escolherlote";
-	// }
+	@GetMapping("/abrirescolherpaciente")
+	public String abrirEscolhaPaciente() {
+		return "consulta/escolherpaciente";
+	}
 	
-	// @GetMapping("/pesquisarlote")
-	// public String pesquisarLote(LoteFilter filtro, Model model,
-	// 		@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
-	// 		HttpServletRequest request) {
-	// 	Page<Lote> pagina = loteRepository.pesquisar(filtro, pageable, true);
-	// 	PageWrapper<Lote> paginaWrapper = new PageWrapper<>(pagina, request);
-	// 	model.addAttribute("pagina", paginaWrapper);
-	// 	return "aplicacao/mostrarlotes";
-	// }
+	@GetMapping("/pesquisarpaciente")
+	public String pesquisarPaciente(PacienteFilter filtro, Model model,
+			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+			HttpServletRequest request) {
+		Page<Paciente> pagina = pacienteRepository.pesquisar(filtro, pageable);
+		PageWrapper<Paciente> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		return "consulta/mostrarpaciente";
+	}
 	
-	// @PostMapping("/escolherlote")
-	// public String escolherLote(Lote lote, HttpSession sessao) {
-	// 	Aplicacao aplicacao = buscarAplicacaoNaSessao(sessao);
-	// 	aplicacao.setLote(lote);
-	// 	sessao.setAttribute("aplicacao", aplicacao);
-	// 	return "aplicacao/cadastrar";
-	// }
+	@PostMapping("/escolherpaciente")
+	public String escolherPaciente(Paciente paciente, HttpSession sessao) {
+		Consulta consulta = buscarConsultaNaSessao(sessao);
+		consulta.setPaciente(paciente);
+		sessao.setAttribute("consulta", consulta);
+		return "consulta/cadastrar";
+	}
 	
-	// @GetMapping("/efetuarcadastro")
-	// public String cadastrar(HttpSession sessao, SessionStatus status) {
-	// 	Consulta consulta = buscarConsultaNaSessao(sessao);
-	// 	consulta.setData(LocalDate.now());
-	// 	consultaService.salvar(consulta);
-	// 	consulta.getLote().setNroDosesAtual(consulta.getLote().getNroDosesAtual() - 1);
-	// 	loteService.alterar(consulta.getLote());
-	// 	status.setComplete();
-	// 	sessao.invalidate();
-	// 	return "redirect:/consultas/cadastro/sucesso";
-	// }
+	@GetMapping("/efetuarcadastro")
+	public String cadastrar(HttpSession sessao, SessionStatus status) {
+		Consulta consulta = buscarConsultaNaSessao(sessao);  
+		consultaService.salvar(consulta);
+		status.setComplete();
+		sessao.invalidate();
+		return "redirect:/consultas/cadastro/sucesso";
+	}
 	
 	@GetMapping("/cadastro/sucesso")
 	public String mostrarMensagemCadastroSucesso(Model model) {
