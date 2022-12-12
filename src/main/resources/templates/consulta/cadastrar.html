@@ -14,41 +14,36 @@
 		<main class="mt-5 p-4 pt-5">
 			<h2>Agendar Consulta</h2>
 			<div class="container-fluid">
- 
-				<form th:action="@{/consultas/abrirescolherpsicologo}" method="get">
-					<button type="submit" class="btn btn-primary mt-3">Escolher Psicologo</button>
-				</form>
-				<div th:if="${session.consulta?.psicologo != null}" class="mt-3">
-					<label th:text="'Psicologo: '  + ${session.consulta.psicologo.nome}"></label>
-					<label th:text="' - ' + ${session.consulta.psicologo.specialty.descricao}"></label>
-				</div>				
-				
-				<form th:action="@{/consultas/abrirescolherpaciente}" method="get">
-					<button type="submit" class="btn btn-primary mt-3">Escolher Paciente</button>
-				</form>
-				<div th:if="${session.consulta?.paciente != null}" class="mt-3">
-					<label th:text="'Psicologo: ' + ${session.consulta.paciente.nome}"></label>
-				</div>	
-				
-				<div class="mb-3 pt-3" 
-					 style="width: 17%;">
-					<label for="consulteDate" class="form-label">Data da Consulta</label>
-					<input type="text" class="form-control componentedata">
-				</div>
+					<form th:action="@{/consultas/abrirescolherpsicologo}" method="get">
+						<button type="submit" class="btn btn-primary mt-3">Escolher Psicologo</button>
+					</form>
+					<div th:if="${session.consulta?.psicologo != null}" class="mt-3">
+						<label th:text="'Psicologo: '  + ${session.consulta.psicologo.nome}"></label>
+						<label th:text="' - ' + ${session.consulta.psicologo.specialty.descricao}"></label>
+					</div>				
+					
+					<form th:action="@{/consultas/abrirescolherdiahora}" method="get">
+						<button type="submit" class="btn btn-primary mt-3">Escolher Dia Hora</button>
+					</form>
+					
+					<div th:if="${session.consulta?.paciente != null}" class="mt-3">
+						<label th:text="'Data e Hora: ' + ${session.consulta.consulteDate}"></label>
+						<label th:text=" ' - ' + ${session.consulta.hora.descricao}"></label>
+					</div>	
 
-				<div class="mb-3">
-					<label for="consulteDate" class="form-label">Horário da Consulta: </label><br>
-					<select name="horario">
-						<option th:each="horario : ${T(com.daw2.lindovaldo.model.Horario).values()}" 
-							th:value="${horario}" th:text="${horario.descricao}"></option>
-					</select>
-				</div>
-
-				<form th:action="@{/consultas/efetuarcadastro}" method="get">
-					<button type="submit" class="btn btn-primary mt-3"
-					        th:disabled="${session.consulta?.psicologo == null} or
-							 ${session.consulta?.paciente == null}">Agendar Consulta</button>
-				</form>
+					<form th:action="@{/consultas/abrirescolherpaciente}" method="get">
+						<button type="submit" class="btn btn-primary mt-3">Escolher Paciente</button>
+					</form>
+					<div th:if="${session.consulta?.paciente != null}" class="mt-3">
+						<label th:text="'Paciente: ' + ${session.consulta.paciente.nome}"></label>
+					</div>	
+	
+					<form th:action="@{/consultas/efetuarcadastro}" method="get">
+						<button type="submit" class="btn btn-primary mt-3"
+						th:disabled="${session.consulta?.psicologo == null} or
+						${session.consulta?.paciente == null}">Agendar Consulta</button>
+								
+					</form>
 
 			</div>
 		</main>
