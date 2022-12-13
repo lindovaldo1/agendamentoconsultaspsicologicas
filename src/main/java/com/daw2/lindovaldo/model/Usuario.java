@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,28 +14,41 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import com.daw2.lindovaldo.service.NomeUsuarioUnicoService;
+import com.daw2.lindovaldo.validation.UniqueValueAttribute;
 
 @Entity
 @Table(name = "usuario")
+@UniqueValueAttribute(attribute = "nomeUsuario", service = NomeUsuarioUnicoService.class, message = "Já existe um nome de usuário igual a este cadastrado")
 public class Usuario implements Serializable {
 
-	private static final long serialVersionUID = 5757384541654785800L; // Gere outro valor
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="gerador55", sequenceName="usuario_codigo_seq", allocationSize=1)
 	@GeneratedValue(generator="gerador55", strategy=GenerationType.SEQUENCE)
 	private Long codigo;
+	@NotBlank(message = "O nome do usuário é obrigatório")
 	private String nome;
+	@NotBlank(message = "O e-mail do usuário é obrigatório")
 	private String email;
+	@NotBlank(message = "A senha do usuário é obrigatória")
 	private String senha;
 	@Column(name = "nome_usuario")
+	@NotBlank(message = "O nome de usuário do usuário é obrigatório")
 	private String nomeUsuario;
 	@Column(name = "data_nascimento")
+	@NotNull(message = "A data de nascimento do usuário é obrigatória")
 	private LocalDate dataNascimento;
 	private boolean ativo;
 	@ManyToMany
 	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "codigo_papel"))
+	@Size(min = 1, message = "O usuário deve ter ao menos um papel no sistema")
 	private List<Papel> papeis = new ArrayList<>();
+
 
 	public Long getCodigo() {
 		return codigo;
