@@ -5,7 +5,8 @@ INSERT INTO public.usuario (nome, email, senha, nome_usuario, ativo, data_nascim
 
 INSERT INTO public.papel (codigo, nome) VALUES 
 (1, 'ROLE_ADMIN'),
-(2, 'ROLE_USUARIO');
+(2, 'ROLE_USUARIO'),
+(3, 'ROLE_PSICOLOGO');
 
 INSERT INTO public.usuario_papel (codigo_usuario, codigo_papel) VALUES
 (1, 1),
