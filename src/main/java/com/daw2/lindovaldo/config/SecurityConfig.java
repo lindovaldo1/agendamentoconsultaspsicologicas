@@ -14,6 +14,7 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -82,5 +83,5 @@ public class SecurityConfig {
 		PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idEnconder, encoders);
 		return passwordEncoder;
 	}
-       
+
 }
