@@ -11,7 +11,7 @@
 
 		<!-- conteudo principal -->
 		<main class="mt-5 p-4 pt-5">
-			<h2>alalala</h2>
+			<h2>Escolher dara e hora</h2>
 			<form th:action="@{/consultas/escolherdiahora}" method="post">
 				
 				<div class="mb-3 pt-3" 
@@ -24,7 +24,8 @@
 					<label for="consulteDate" class="form-label">Horário da Consulta: </label><br>
 					<select name="horario">
 						<option th:each="horario : ${T(com.daw2.lindovaldo.model.Horario).values()}" 
-							th:value="${horario}" th:text="${horario.descricao}" name="hora" id="hora"></option>
+							th:value="${horario}" th:text="${horario.descricao}" name="hora" id="hora">
+						</option>
 					</select>
 				</div>
 
