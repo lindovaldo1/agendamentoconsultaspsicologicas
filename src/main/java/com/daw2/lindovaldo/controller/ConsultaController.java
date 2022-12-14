@@ -117,21 +117,6 @@ public class ConsultaController {
 		return "consulta/cadastrar";
 	}
 	
-	@GetMapping("/efetuarcadastro")
-	public String cadastrar(HttpSession sessao, SessionStatus status) {
-		Consulta consulta = buscarConsultaNaSessao(sessao);  
-		consultaService.salvar(consulta);
-		status.setComplete();
-		sessao.invalidate();
-		return "redirect:/consultas/cadastro/sucesso";
-	}
-	
-	@GetMapping("/cadastro/sucesso")
-	public String mostrarMensagemCadastroSucesso(Model model) {
-		model.addAttribute("mensagem", "Agendamento de Consulta efetuado com sucesso.");
-		return "mostrarmensagem";
-	}
-	
 	@GetMapping("/abrirescolherdiahora")
 	public String abrirEscolhaDiaHora() {
 		return "consulta/escolherdiahora";
@@ -147,4 +132,18 @@ public class ConsultaController {
 		sessao.setAttribute("consulta", consulta);
 		return "consulta/cadastrar";
 	}
+
+	@GetMapping("/efetuarcadastro")
+	public String cadastrar(HttpSession sessao, SessionStatus status) {
+		Consulta consulta = buscarConsultaNaSessao(sessao);  
+		consultaService.salvar(consulta);
+		return "redirect:/consultas/cadastro/sucesso";
+	}
+	
+	@GetMapping("/cadastro/sucesso")
+	public String mostrarMensagemCadastroSucesso(Model model) {
+		model.addAttribute("mensagem", "Agendamento de Consulta efetuado com sucesso.");
+		return "mostrarmensagem";
+	}
+	
 }

@@ -24,14 +24,13 @@
 					
 					<form th:action="@{/consultas/abrirescolherdiahora}" method="get">
 						<button type="submit" class="btn btn-primary mt-3">Escolher Dia Hora</button>
-					</form>
-					
+					</form>					
 					<div th:if="${session.consulta?.paciente != null}" class="mt-3">
 						<label th:text="'Data e Hora: ' + ${session.consulta.consulteDate}"></label>
 						<label th:text=" ' - ' + ${session.consulta.hora.descricao}"></label>
 					</div>	
 
-					<div sec:authorize="hasRole('ROLE_PSICOLOgo')">
+					<div sec:authorize="hasRole('ROLE_PSICOLOGO')">
 						<form th:action="@{/consultas/abrirescolherpaciente}" method="get">
 							<button type="submit" class="btn btn-primary mt-3">Escolher Paciente</button>
 						</form>
