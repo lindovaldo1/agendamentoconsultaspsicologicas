@@ -3,6 +3,7 @@ package com.daw2.lindovaldo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,7 +58,7 @@ public class PacienteController {
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrar(Paciente paciente) {
+    public String cadastrar(@Valid Paciente paciente) {
         pacienteService.salvar(paciente);
         return "redirect:/pacientes/cadastrar/sucesso";
     }
@@ -76,7 +77,7 @@ public class PacienteController {
     }
 
     @PostMapping("/alterar")
-    public String alterar(Paciente paciente) {
+    public String alterar(@Valid Paciente paciente) {
         pacienteService.alterar(paciente);
         return "redirect:/pacientes/alterar/sucesso";
     }
