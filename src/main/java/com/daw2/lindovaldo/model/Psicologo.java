@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -25,9 +26,10 @@ public class Psicologo implements Serializable {
 	@GeneratedValue(generator = "generator2", strategy = GenerationType.SEQUENCE)
 	private Long codigo;
 
-	@NotNull(message = "Name is required")
+	@NotBlank(message = "Name is required")
 	private String nome;
 
+	@NotBlank(message = "CPF is required")
 	private String cpf;
 
 	@Enumerated(EnumType.STRING)

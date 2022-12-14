@@ -33,8 +33,6 @@ public class Usuario implements Serializable {
 	private Long codigo;
 	@NotBlank(message = "O nome do usuário é obrigatório")
 	private String nome;
-	@NotBlank(message = "O e-mail do usuário é obrigatório")
-	private String email;
 	@NotBlank(message = "A senha do usuário é obrigatória")
 	private String senha;
 	@Column(name = "nome_usuario")
@@ -64,14 +62,6 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getSenha() {
@@ -149,7 +139,7 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "codigo: " + codigo + "\nnome: " + nome + "\nemail: " + email + "\nsenha: " + senha + "\nusuario: " + nomeUsuario + "\ndataNascimento: " + dataNascimento + "\nativo: " + ativo;
+		return "codigo: " + codigo + "\nnome: " + nome + "\nsenha: " + senha + "\nusuario: " + nomeUsuario + "\ndataNascimento: " + dataNascimento + "\nativo: " + ativo;
 	}
 
 }

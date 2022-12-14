@@ -3,6 +3,7 @@ package com.daw2.lindovaldo.model;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -16,10 +17,10 @@ public class Paciente implements Serializable {
     @GeneratedValue(generator = "generator1", strategy = GenerationType.SEQUENCE)
     private Long codigo;
 
-    @NotNull(message = "First name is required")
+    @NotBlank(message = "First name is required")
     private String nome;
 
-    @NotNull(message = "CPF is required")
+    @NotBlank(message = "CPF is required")
     private String cpf;
 
     @Enumerated(EnumType.STRING)
