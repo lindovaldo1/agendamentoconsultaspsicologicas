@@ -46,8 +46,8 @@
               <td th:text="${p.codigo}"></td>
               <td th:text="${p.paciente.nome}"></td>
               <td th:text="${p.psicologo.nome}"></td>
-              <td th:text="${p.consulteDate}"></td>
-              <td th:text="${p.hora}"></td>
+              <td th:text="${{p.consulteDate}}" class="componentedata"></td>
+              <td th:text="${p.hora.descricao}"></td>
 
               <td>
                 <form th:action="@{/consultas/abriralterar}" method="post">

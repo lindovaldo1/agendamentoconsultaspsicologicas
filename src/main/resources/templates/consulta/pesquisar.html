@@ -28,32 +28,34 @@
 							placeholder="Digite o código da consulta">
 					</div>
 
-					<!-- <div class="mb-3">
+					<div class="mb-3">
 						<label for="psicologo" class="form-label">Psicologo</label> <input
-							type="number" class="form-control" name="psicologo" id="psicologo"
+							type="number" class="form-control" name="codigoPsicologo" id="psicologo"
 							placeholder="Digite o codigo do psicologo">
           </div>
 
+          
           <div class="mb-3">
 						<label for="paciente" class="form-label">Paciente</label> <input
-							type="number" class="form-control" name="paciente" id="paciente"
+							type="number" class="form-control" name="codigoPaciente" id="paciente"
 							placeholder="Digite o codigo do paciente">
           </div>
 
           <div class="mb-3">
 						<label for="consulteDate" class="form-label">Data da Consulta</label> 
-            <input type="text" id="consulteDate" class="form-control mb-4 componentedata">
+            <input type="text" id="consulteDate" class="form-control mb-4 componentedata" placeholder="Selecione a data">
           </div>                    
 
           <div class="mb-3">
             <label for="hora" class="form-label">Horário da Consulta: </label><br>
             <select name="horario">
+              <option value="" selected="selected">Não selecionada</option>
               <option th:each="horario : ${T(com.daw2.lindovaldo.model.Horario).values()}" 
                 th:value="${horario}" th:text="${horario.descricao}" name="hora" id="hora">
               </option>
-            </select>
-          </div> -->
-
+            </select> 
+          </div>
+          
           <button type="submit" class="mt-5 btn btn-primary">Pesquisar</button>
         </form>
       </main>

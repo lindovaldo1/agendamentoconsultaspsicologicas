@@ -1,5 +1,6 @@
 package com.daw2.lindovaldo.repository.helper.consulta;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import com.daw2.lindovaldo.model.Consulta;
+import com.daw2.lindovaldo.model.Horario;
+import com.daw2.lindovaldo.model.Paciente;
+import com.daw2.lindovaldo.model.Psicologo;
 import com.daw2.lindovaldo.model.Status;
 import com.daw2.lindovaldo.model.filter.ConsultaFilter;
 import com.daw2.lindovaldo.repository.pagination.PaginacaoUtil;
@@ -37,6 +41,22 @@ public class ConsultaQueriesImpl implements ConsultaQueries {
 		if (filtro.getCodigo() != null) {
 			predicateList.add(builder.equal(c.<Long>get("codigo"),
 					filtro.getCodigo()));
+		}
+
+		if (filtro.getPsicologo() != 0L) {
+			predicateList.add(builder.equal(c.<Psicologo>get("psicologo").<Psicologo>get("codigo"),
+					filtro.getPsicologo()));
+		}
+
+		if (filtro.getPaciente() != 0L) {
+			predicateList.add(builder.equal(c.<Paciente>get("paciente").<Paciente>get("codigo"),
+					filtro.getPaciente()));
+		}
+		
+		if (filtro.getConsulteDate() != null) {
+			predicateList.add(builder.greaterThanOrEqualTo(
+					c.<LocalDate>get("consulteDate"), 
+		            filtro.getConsulteDate()));
 		}
 		
 
