@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,8 @@ import pagination.PageWrapper;
 @Controller
 @RequestMapping("/pacientes")
 public class PacienteController {
+
+    private static final Logger logger = LoggerFactory.getLogger(PacienteController.class);
 
     @Autowired
     private PacienteService pacienteService;
@@ -58,9 +64,22 @@ public class PacienteController {
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrar(@Valid Paciente paciente) {
-        pacienteService.salvar(paciente);
-        return "redirect:/pacientes/cadastrar/sucesso";
+    public String cadastrar(@Valid Paciente paciente, BindingResult resultado, Model model) {        
+
+        if (resultado.hasErrors()) {
+			logger.info("O paciente recebido para cadastrar não é válido.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			List<Paciente> pacientes = pacienteRepository.findByStatus(Status.ATIVO);
+			model.addAttribute("pacientes", pacientes);
+			return "paciente/cadastrar";
+		} else {
+			pacienteService.salvar(paciente);
+			return "redirect:/pacientes/cadastrar/sucesso";
+		}
+
     }
 
     @GetMapping("/cadastrar/sucesso")

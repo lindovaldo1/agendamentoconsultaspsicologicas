@@ -32,7 +32,10 @@
               class="form-control"
               th:field="*{nome}"
               placeholder="Digite o nome do paciente"
-            />
+              th:errorclass="is-invalid"/>
+              
+              <span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" 
+                          th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
           </div>
           <div class="mb-3">
             <label for="cpf" class="form-label">CPF</label>
@@ -41,7 +44,11 @@
               class="form-control"
               th:field="*{cpf}"
               placeholder="Digite o CPF do paciente"
-            />
+              th:errorclass="is-invalid"/>
+
+              <span class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" 
+                          th:each="erro : ${#fields.errors('cpf')}" th:text="${erro} + '. '"></span>
+
           </div>
           <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
