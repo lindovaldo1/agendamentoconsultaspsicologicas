@@ -23,27 +23,26 @@
         <form th:action="@{/consultas/pesquisar}" method="get">
         
           <div class="mb-3">
-						<label for="id" class="form-label">Código</label> <input
-							type="number" class="form-control" name="id" id="id"
+						<label for="codigo" class="form-label">Código</label> <input
+							type="number" class="form-control" name="codigo" id="codigo"
 							placeholder="Digite o código da consulta">
 					</div>
 
 					<div class="mb-3">
 						<label for="psicologo" class="form-label">Psicologo</label> <input
-							type="number" class="form-control" name="codigoPsicologo" id="psicologo"
+							type="number" class="form-control" name="psicologo" id="psicologo"
 							placeholder="Digite o codigo do psicologo">
           </div>
-
           
           <div class="mb-3">
 						<label for="paciente" class="form-label">Paciente</label> <input
-							type="number" class="form-control" name="codigoPaciente" id="paciente"
+							type="number" class="form-control" name="paciente" id="paciente"
 							placeholder="Digite o codigo do paciente">
           </div>
 
           <div class="mb-3">
 						<label for="consulteDate" class="form-label">Data da Consulta</label> 
-            <input type="text" id="consulteDate" class="form-control mb-4 componentedata" placeholder="Selecione a data">
+            <input type="text" id="consulteDate" name="consulteDate" class="form-control mb-4 componentedata" placeholder="Selecione a data">
           </div>                    
 
           <div class="mb-3">
