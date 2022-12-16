@@ -18,10 +18,7 @@
 				<form th:action="@{/usuarios/cadastrar}" method="post" th:object="${usuario}">
 					<label for="nome" class="form-label mt-4">Nome:</label>
 					<input type="text" id="nome" th:field="*{nome}" autofocus="autofocus" class="form-control" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>
-					<label for="email" class="form-label mt-3">E-mail:</label>
-					<input type="email" id="email" th:field="*{email}" class="form-control" th:errorclass="is-invalid">
-					<span class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:each="erro : ${#fields.errors('email')}" th:text="${erro} + '. '"></span>
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '"></span>										
 					<label for="senha" class="form-label mt-3">Senha:</label>
 					<input type="password" id="senha" th:field="*{senha}" class="form-control" th:errorclass="is-invalid">
 					<span class="invalid-feedback" th:if="${#fields.hasErrors('senha')}" th:each="erro : ${#fields.errors('senha')}" th:text="${erro} + '. '"></span>
