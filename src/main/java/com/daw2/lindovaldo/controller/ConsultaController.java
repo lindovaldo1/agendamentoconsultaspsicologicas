@@ -52,11 +52,27 @@ public class ConsultaController {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+
     @GetMapping("/cadastrar")
 	public String abrirCadastro(HttpSession sessao) {
 		Consulta consulta = buscarConsultaNaSessao(sessao);
 		sessao.setAttribute("consulta", consulta);
 		return "consulta/cadastrar";
+	}
+
+	@GetMapping("/abrirpesquisar")
+    public String abrirPesquisa() {
+        return "consulta/pesquisar";
+    }
+
+	@GetMapping("/pesquisar")
+	public String pesquisar(ConsultaFilter filtro, Model model,
+			@PageableDefault(size = 10) @SortDefault(sort = "codigo", direction = Sort.Direction.ASC) Pageable pageable,
+			HttpServletRequest request) {
+		Page<Consulta> pagina = consultaRepository.pesquisar(filtro, pageable, false);
+		PageWrapper<Consulta> paginaWrapper = new PageWrapper<>(pagina, request);
+		model.addAttribute("pagina", paginaWrapper);
+		return "consulta/mostrartodas";
 	}
 
 
@@ -124,10 +140,17 @@ public class ConsultaController {
 
 	@PostMapping("/escolherdiahora")
 	public String escolherDiaHora(Horario horario, Date consulteDate, HttpSession sessao) {
+
 		LocalDate date = consulteDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Consulta consulta = buscarConsultaNaSessao(sessao);
+		List<Consulta> consultas = consultaRepository.findByPsicologo(consulta.getPsicologo());
 		consulta.setHora(horario);
 		consulta.setConsulteDate(date);
+
+		if(!(consulta.getConsulteDate().isAfter(LocalDate.now()))){
+			return "redirect:/consultas/cadastro/errodata";
+		}
+
 		System.out.println(consulta.toString());
 		sessao.setAttribute("consulta", consulta);
 		return "consulta/cadastrar";
@@ -146,4 +169,16 @@ public class ConsultaController {
 		return "mostrarmensagem";
 	}
 	
+	@GetMapping("/cadastro/errodata")
+	public String mostrarMensagemCadastroErroData(Model model) {
+		model.addAttribute("mensagem", "Agendamento de Consulta não efetuado! A data deve ser posterior a data atual.");
+		return "mostrarmensagem";
+	}
+
+	@GetMapping("/cadastro/errohora")
+	public String mostrarMensagemCadastroErroHora(Model model) {
+		model.addAttribute("mensagem", "Agendamento de Consulta não efetuado! Esse horario não está disponivel.");
+		return "mostrarmensagem";
+	}
+
 }

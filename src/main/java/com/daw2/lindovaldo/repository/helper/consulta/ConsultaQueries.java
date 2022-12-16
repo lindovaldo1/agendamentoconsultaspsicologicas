@@ -8,6 +8,6 @@ import com.daw2.lindovaldo.model.filter.ConsultaFilter;
 
 public interface ConsultaQueries {
 
-	Page<Consulta> pesquisar(ConsultaFilter filtro, Pageable pageable);
+	Page<Consulta> pesquisar(ConsultaFilter filtro, Pageable pageable, boolean b);
 
 }
