@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="mb-3">
-					<label for="consulteDate" class="form-label">Horário da Consulta: </label><br>
+					<label for="hora" class="form-label">Horário da Consulta: </label><br>
 					<select name="horario">
 						<option th:each="horario : ${T(com.daw2.lindovaldo.model.Horario).values()}" 
 							th:value="${horario}" th:text="${horario.descricao}" name="hora" id="hora">

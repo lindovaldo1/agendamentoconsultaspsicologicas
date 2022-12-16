@@ -33,7 +33,7 @@ public class SecurityConfig {
 			// Um usuário autenticado e com o papel ADMIN pode fazer requisições para essas URLs	
 			.antMatchers("/consultas/**").hasAnyRole("PSICOLOGO", "ADMIN")			
 			.antMatchers("/usuarios/**").hasAnyRole("PSICOLOGO", "ADMIN")
-			.antMatchers("/consultas/**").hasAnyRole("PACIENTE")
+			.antMatchers("/consultas/**").hasAnyRole("PACIENTE", "ADMIN")
 			.anyRequest().authenticated()
 			//.antMatchers("URL").hasAnyRole("ADMIN", "USUARIO")
 			.and()
