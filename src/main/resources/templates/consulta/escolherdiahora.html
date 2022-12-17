@@ -20,9 +20,10 @@
 					<input type="text" class="form-control componentedata" id="consulteDate" name="consulteDate" >
 				</div>
 
-				<div class="mb-3">
+				<div class="mb-3"
+				style="width: 17%;">
 					<label for="hora" class="form-label">Horário da Consulta: </label><br>
-					<select name="horario">
+					<select name="horario" class="form-select">
 						<option th:each="horario : ${T(com.daw2.lindovaldo.model.Horario).values()}" 
 							th:value="${horario}" th:text="${horario.descricao}" name="hora" id="hora">
 						</option>
