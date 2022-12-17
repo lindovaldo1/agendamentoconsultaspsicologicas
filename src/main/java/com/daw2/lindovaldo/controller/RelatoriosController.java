@@ -13,28 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.daw2.lindovaldo.service.RelatorioService;
 
 @Controller
-@RequestMapping("/relatorios")
-public class RelatorioController {
-
-	private static final Logger logger = LoggerFactory.getLogger(RelatorioController.class);
+@RequestMapping("/print")
+public class RelatoriosController {
+	
+private static final Logger logger = LoggerFactory.getLogger(RelatoriosController.class);
 	
 	@Autowired
 	private RelatorioService relatorioService;
 	
-	@GetMapping("/vacinas")
-	public ResponseEntity<byte[]> gerarRelatorioSimples() {
-		logger.trace("Entrou em gerarRelatorioSimples");
-		logger.debug("Gerando relatório simples");
-		
-		byte[] relatorio = relatorioService.gerarRelatorioSimples();
-		
-		logger.debug("Relatório simples de todas as pessoas gerado");
-		logger.debug("Retornando o relatório simples de todas as pessoas");
+	@GetMapping("/simples")
+	public ResponseEntity<byte[]> gerarRelatorioComplexoTodasReservas() {
+
+		byte[] relatorio = relatorioService.gerarRelatorioComplexoTodasReservas();
+
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Relatorio.pdf")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=TodasConsultas.pdf")
 				.body(relatorio);
 	}
-	
-	
+
 }
