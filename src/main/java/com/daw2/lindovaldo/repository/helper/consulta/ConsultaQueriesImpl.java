@@ -43,13 +43,13 @@ public class ConsultaQueriesImpl implements ConsultaQueries {
 					filtro.getCodigo()));
 		}
 
-		if (filtro.getPsicologo() != 0L) {
-			predicateList.add(builder.equal(c.<Psicologo>get("psicologo").<Psicologo>get("codigo"),
+		if (filtro.getPsicologo() != null) {
+			predicateList.add(builder.equal(c.<Psicologo>get("psicologo").<Long>get("codigo"),
 					filtro.getPsicologo()));
 		}
 
-		if (filtro.getPaciente() != 0L) {
-			predicateList.add(builder.equal(c.<Paciente>get("paciente").<Paciente>get("codigo"),
+		if (filtro.getPaciente() != null) {
+			predicateList.add(builder.equal(c.<Paciente>get("paciente").<Long>get("codigo"),
 					filtro.getPaciente()));
 		}
 		
